@@ -1,4 +1,5 @@
 fastapi==0.115.12
 uvicorn[standard]==0.34.2
-httpx==0.28.1
 python-multipart==0.0.20
+huggingface_hub>=0.30.0
+Pillow>=10.0.0
