@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#090a0f"><meta name="description" content="X5 AI Studio — edição de imagens com inteligência artificial.">
+  <title>X5 AI Studio</title><link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+<div class="app-shell">
+  <aside class="sidebar">
+    <a class="brand" href="#"><span class="brand-mark">X5</span><span><b>X5 AI STUDIO</b><small>IMAGE WORKSPACE</small></span></a>
+    <div class="side-label">WORKSPACE</div>
+    <button class="nav active" data-tab="editor"><span>✳</span> Editor <kbd>01</kbd></button>
+    <button class="nav" data-tab="history"><span>◷</span> Histórico</button>
+    <div class="side-label space">TOOLS</div>
+    <button class="nav" data-tab="models"><span>◇</span> Modelos & LoRAs</button>
+    <button class="nav" data-tab="settings"><span>⚙</span> Configurações</button>
+    <div class="sidebar-bottom"><div class="status-dot"></div><span>Workspace pronto</span><small>v1.0</small></div>
+  </aside>
+  <main class="main">
+    <header class="topbar"><div><span class="eyebrow">IMAGE INTELLIGENCE /</span> <b id="page-name">EDITOR</b></div><div class="top-actions"><span class="connection" id="connection">Backend não conectado</span><button class="icon-btn" id="open-settings" title="Configurações">⚙</button><div class="avatar">X5</div></div></header>
+    <section class="view active" id="view-editor">
+      <div class="heading"><div><span class="eyebrow">CREATE / TRANSFORM / REFINE</span><h1>Seu próximo visual começa aqui<span class="violet">.</span></h1><p>Edite imagens com instruções em linguagem natural e mantenha o controle do resultado.</p></div><div class="model-chip"><i></i><span>IMAGE EDIT</span></div></div>
+      <div class="workspace">
+        <section class="panel image-panel">
+          <div class="panel-head"><div><b>01 — IMAGEM DE ENTRADA</b><small>Envie uma imagem para começar</small></div><button class="text-btn" id="clear-image">Limpar</button></div>
+          <label class="dropzone" id="dropzone" for="file-input"><input id="file-input" type="file" accept="image/png,image/jpeg,image/webp"><div id="upload-empty" class="upload-empty"><div class="upload-icon">↑</div><b>Arraste sua imagem para cá</b><span>ou <u>clique para procurar</u></span><small>PNG, JPG ou WEBP · até 10 MB</small></div><img id="source-preview" alt="Prévia da imagem enviada" hidden></label>
+          <div class="image-meta" id="image-meta">Nenhuma imagem selecionada</div>
+          <div class="result-wrap" id="result-wrap" hidden><div class="result-head"><b>RESULTADO GERADO</b><button class="text-btn" id="download-result">↓ Baixar</button></div><img id="result-preview" alt="Imagem editada"></div>
+        </section>
+        <section class="panel controls-panel">
+          <div class="panel-head"><div><b>02 — DIREÇÃO CRIATIVA</b><small>Descreva o que deseja transformar</small></div><span class="step">PROMPT</span></div>
+          <label class="field-label" for="prompt">INSTRUÇÃO DE EDIÇÃO</label>
+          <textarea id="prompt" rows="6" placeholder="Ex.: Transforme este render arquitetônico em uma fotografia ultrarrealista. Aprimore iluminação natural, materiais e texturas. Preserve exatamente a geometria, o enquadramento e a disposição dos elementos."></textarea>
+          <div class="prompt-tools"><button class="preset" data-prompt="Transforme em fotografia arquitetônica fotorrealista. Aprimore iluminação, materiais e texturas, preservando rigorosamente geometria, enquadramento, proporções e todos os elementos existentes.">⌂ Realismo arquitetônico</button><button class="preset" data-prompt="Melhore a iluminação natural e o equilíbrio de exposição, mantendo todos os elementos e a composição original sem alterações.">☼ Iluminação</button><button class="preset" data-prompt="Refine a qualidade visual e as texturas dos materiais com aparência fotográfica, sem modificar o projeto original.">◈ Materiais</button></div>
+          <div class="divider"></div>
+          <div class="field-row"><label class="field-label" for="model">MODELO</label><label class="field-label" for="strength">INTENSIDADE <output id="strength-value">0.55</output></label></div>
+          <div class="field-row"><select id="model"><option value="Qwen/Qwen-Image-Edit">Qwen Image Edit</option></select><input id="strength" type="range" min="0.1" max="1" step="0.05" value="0.55"></div>
+          <p class="hint">A intensidade é uma orientação da interface. O suporte efetivo depende do endpoint/modelo configurado.</p>
+          <label class="field-label" for="aspect">PROPORÇÃO DE SAÍDA</label><select id="aspect"><option value="original">Manter original</option><option value="1:1">Quadrado (1:1)</option><option value="4:3">Paisagem (4:3)</option><option value="16:9">Widescreen (16:9)</option><option value="3:4">Retrato (3:4)</option></select>
+          <div class="preserve"><span class="shield">⬡</span><span><b>Preservação do projeto</b><small>Inclua no prompt o que não pode ser alterado. O modelo pode não preservar cada detalhe perfeitamente.</small></span></div>
+          <button class="generate" id="generate"><span>✦</span> GERAR IMAGEM <span class="arrow">→</span></button>
+          <div class="job-status" id="job-status" role="status">Pronto para receber uma imagem.</div>
+        </section>
+      </div>
+      <div class="bottom-note"><span>✳</span> X5 AI STUDIO <span class="muted">— Ferramenta independente de edição por IA.</span><span class="spacer"></span><span>YOUR IMAGE. YOUR DIRECTION.</span></div>
+    </section>
+    <section class="view" id="view-history"><div class="heading"><div><span class="eyebrow">YOUR CREATIONS</span><h1>Histórico<span class="violet">.</span></h1><p>Resultados desta sessão ficam disponíveis neste navegador.</p></div></div><div class="history-grid" id="history-grid"><div class="empty-state">Suas imagens geradas aparecerão aqui.</div></div></section>
+    <section class="view" id="view-models"><div class="heading"><div><span class="eyebrow">ENGINE CONFIGURATION</span><h1>Modelos & LoRAs<span class="violet">.</span></h1><p>Configure o modelo servido pelo backend.</p></div></div><div class="panel info-panel"><h3>Qwen Image Edit</h3><p>Modelo selecionado como padrão para edição de imagens. O backend precisa estar ligado a um provedor que disponibilize esse modelo e aceite entrada de imagem.</p><div class="model-detail"><span>Família</span><b>Image editing</b><span>Identificador</span><code>Qwen/Qwen-Image-Edit</code><span>LoRAs</span><b>Dependem do endpoint</b></div><p class="hint">Os presets desta versão são instruções de prompt, não arquivos LoRA. Para carregar LoRAs reais, configure um endpoint que ofereça suporte explícito a adaptadores.</p></div></section>
+    <section class="view" id="view-settings"><div class="heading"><div><span class="eyebrow">CONNECTION & PRIVACY</span><h1>Configurações<span class="violet">.</span></h1><p>Conecte o serviço que processará as imagens.</p></div></div><div class="panel settings-panel"><label class="field-label" for="api-url">URL DO BACKEND</label><input id="api-url" type="url" placeholder="https://seu-servico.onrender.com"><label class="field-label" for="app-key">CHAVE DA APLICAÇÃO (OPCIONAL)</label><input id="app-key" type="password" autocomplete="off" placeholder="Chave definida no backend"><div class="settings-actions"><button class="secondary" id="test-connection">Testar conexão</button><button class="generate compact" id="save-settings">Salvar configurações</button></div><p class="hint">A URL e a chave ficam salvas localmente neste navegador. O token Hugging Face deve ficar exclusivamente no servidor.</p><div class="notice"><b>Segurança</b><p>Nunca cole seu token HF nesta página. Configure HF_TOKEN nas variáveis de ambiente do backend. Não publique chaves privadas no GitHub.</p></div></div></section>
+  </main>
+</div>
+<script src="assets/app.js"></script>
+</body></html>
