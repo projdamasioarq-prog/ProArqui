@@ -34,10 +34,9 @@
           <textarea id="prompt" rows="6" placeholder="Ex.: Transforme este render arquitetônico em uma fotografia ultrarrealista. Aprimore iluminação natural, materiais e texturas. Preserve exatamente a geometria, o enquadramento e a disposição dos elementos."></textarea>
           <div class="prompt-tools"><button class="preset" data-prompt="Transforme em fotografia arquitetônica fotorrealista. Aprimore iluminação, materiais e texturas, preservando rigorosamente geometria, enquadramento, proporções e todos os elementos existentes.">⌂ Realismo arquitetônico</button><button class="preset" data-prompt="Melhore a iluminação natural e o equilíbrio de exposição, mantendo todos os elementos e a composição original sem alterações.">☼ Iluminação</button><button class="preset" data-prompt="Refine a qualidade visual e as texturas dos materiais com aparência fotográfica, sem modificar o projeto original.">◈ Materiais</button></div>
           <div class="divider"></div>
-          <div class="field-row"><label class="field-label" for="model">MODELO</label><label class="field-label" for="strength">INTENSIDADE <output id="strength-value">0.55</output></label></div>
-          <div class="field-row"><select id="model"><option value="Qwen/Qwen-Image-Edit">Qwen Image Edit</option></select><input id="strength" type="range" min="0.1" max="1" step="0.05" value="0.55"></div>
-          <p class="hint">A intensidade é uma orientação da interface. O suporte efetivo depende do endpoint/modelo configurado.</p>
-          <label class="field-label" for="aspect">PROPORÇÃO DE SAÍDA</label><select id="aspect"><option value="original">Manter original</option><option value="1:1">Quadrado (1:1)</option><option value="4:3">Paisagem (4:3)</option><option value="16:9">Widescreen (16:9)</option><option value="3:4">Retrato (3:4)</option></select>
+          <label class="field-label" for="model">MODELO DE EDIÇÃO</label>
+          <select id="model"><option value="Qwen/Qwen-Image-Edit">Qwen Image Edit</option></select>
+          <p class="hint">O modelo preserva a proporção original como padrão. Os controles avançados serão habilitados conforme o provedor oferecer suporte.</p>
           <div class="preserve"><span class="shield">⬡</span><span><b>Preservação do projeto</b><small>Inclua no prompt o que não pode ser alterado. O modelo pode não preservar cada detalhe perfeitamente.</small></span></div>
           <button class="generate" id="generate"><span>✦</span> GERAR IMAGEM <span class="arrow">→</span></button>
           <div class="job-status" id="job-status" role="status">Pronto para receber uma imagem.</div>
